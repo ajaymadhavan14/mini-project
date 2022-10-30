@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressHbs = require('express-handlebars');
 var fileUpload = require('express-fileupload');
+var db = require('./config/connection');
+var session = require('express-session');
 
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
@@ -16,6 +18,19 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.engine('hbs',expressHbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/'}))
 
+
+app.use(session({
+  secret: "key",
+  saveUninitialized: true,
+  cookie: {maxAge: 60000},
+  resave: false
+}))
+
+app.use((req, res, next)=>{
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next()
+})
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,6 +38,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
 
+
+db.connect((err,done)=>{
+  if(err) console.log('Connection error'+err);
+  else console.log('Database connected');
+})
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 
