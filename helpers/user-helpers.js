@@ -2,6 +2,7 @@ var db = require('../config/connection');
 var collection = require('../config/collections');
 const bcrypt = require('bcrypt');
 const { response } = require('express');
+var objectId = require('mongodb').ObjectId
 
 module.exports={
     doSignup:(userData)=>{
@@ -36,6 +37,49 @@ module.exports={
                 resolve({status:false})
             }
         })
-    }
+    },
+
+    getAllUsers:()=>{
+        return new Promise(async (resolve,reject)=>{
+            let users=await db.get().collection(collection.USER_COLLECTION).find().toArray()
+            resolve(users)
+        })
+    },
+
+    deleteUser:(userId)=>{
+        return new Promise((resolve,reject)=>{
+            //console.log(userId);
+            //console.log(objectId(userId));
+            db.get().collection(collection.USER_COLLECTION).deleteOne({_id:objectId(userId)}).then((response)=>{
+                resolve(response)
+                
+            })
+        })
+
+     },
+
+     getUserDetails:(prodId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(prodId)}).then((user)=>{
+                resolve(user)
+            })
+        })
+    },
+
+    updateUser:(prodId,userDetails)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(prodId)},{
+                $set:{
+                    Name:userDetails.Name,
+                   Email:userDetails.Email
+                }
+            }).then((response)=>{
+                resolve()
+            })
+        })
+      }
+
+
+
 }
 

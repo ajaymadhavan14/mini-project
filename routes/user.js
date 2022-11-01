@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
  productHelpers.getAllProducts().then((products)=>{
   //console.log(products);
 
-   res.render('users/home',{user:true,products,users});
+   res.render('users/home',{products,users,user:true});
  })
 
   //res.render('users/index',{user:true,products});
