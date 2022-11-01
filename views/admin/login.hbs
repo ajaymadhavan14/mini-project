@@ -10,25 +10,26 @@
          <form action="/admin/products" method="post">
 
             <div class="form-outline mb-4">
-              <input type="email" id="typeEmailX-2" class="form-control form-control-lg" placeholder="Email" name="Email" />
+              <input type="email" id="typeEmailX-2" class="form-control form-control-lg" placeholder="Email" name="Email" required />
               <label class="form-label" for="typeEmailX-2"></label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" placeholder="Password" name="Password" />
+              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" placeholder="Password" name="Password" required />
               <label class="form-label" for="typePasswordX-2"></label>
             </div>
-
-            <!-- Checkbox -->
-            
+  
 
             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
 
-            <hr class="my-4">
+            
 
          </form>
-
-           
+          {{#if err}}
+           <div class="alert alert-danger" role="alert">
+                Incorrect username or password !
+                    </div>
+           {{/if}}
           </div>
         </div>
       </div>

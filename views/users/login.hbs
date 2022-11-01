@@ -9,7 +9,7 @@
                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
+              <div class="card-body p-4 p-lg-5 text-black"  style="max-height:640px">
 
                 <form action="/login" method="post">
 
@@ -21,18 +21,14 @@
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example17" class="form-control form-control-lg" name="Email" placeholder="Enter email"/>
+                    <input type="email" id="form2Example17" class="form-control form-control-lg" name="Email" placeholder="Enter email" required/>
                     <label class="form-label" for="form2Example17">Email address</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example27" class="form-control form-control-lg" name="Password" placeholder="Enter password" />
+                    <input type="password" id="form2Example27" class="form-control form-control-lg" name="Password" placeholder="Enter password" required/>
                     <label class="form-label" for="form2Example27">Password</label>
                   </div>
-{{!--             
-                       {{#if message}}
-                        <p style="color: red;">Entered credentials are didn't match</p>
-                  {{/if}} --}}
       
                   <div class="pt-1 mb-4">
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
@@ -41,9 +37,13 @@
                   <a class="small text-muted" href="#!">Forgot password?</a>
                   <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? 
                     <a href="/signup" style="color: #393f81;">Create new account</a></p>
-                  <a href="#!" class="small text-muted">Terms of use.</a>
-                  <a href="#!" class="small text-muted">Privacy policy</a>
+                 
                 </form>
+                 {{#if message}}
+                    <div class="alert alert-danger " role="alert">
+                      Incorrect username or password !
+                    </div>
+                   {{/if}}
 
               </div>
             </div>

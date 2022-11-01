@@ -10,7 +10,12 @@ const email1="admin@gmail.com"
 const password1="111";
 
 router.get('/',(req,res)=>{
-  res.render('admin/login')
+  if(!req.session.admin){
+  res.render('admin/login',{err:req.session.message});
+  req.session.message=false;
+  }else{
+    res.redirect('/admin/view-products')
+  }
 })
 
 
@@ -20,12 +25,12 @@ router.post('/products',(req,res,next)=>{
 
   const {Email,Password}=req.body;
   if(Email==email1 && Password==password1){
+    
     req.session.admin = true;
    
-    
-    res.redirect('/admin/view-products',{admin:true})}else{
+    res.redirect('/admin/view-products')}else{
       req.session.message=true;
-      req.session.admin = false;
+     
       res.redirect('/admin')
     }
     

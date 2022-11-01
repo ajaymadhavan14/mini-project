@@ -7,18 +7,22 @@ var userHelpers = require('../helpers/user-helpers');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let users=req.session.user
- productHelpers.getAllProducts().then((products)=>{
-  //console.log(products);
+    productHelpers.getAllProducts().then((products)=>{
+     //console.log(products);
+      res.render('users/home',{products,users,user:true});
+    })
 
-   res.render('users/home',{products,users,user:true});
- })
 
-  //res.render('users/index',{user:true,products});
 });
 
 
 router.get('/login',(req,res)=>{
-  res.render('users/login',{"message":req.session.message})
+  if(req.session.loggedIn){
+    res.redirect('/')
+  }else{
+    res.render('users/login',{message:req.session.message})
+    req.session.message=false
+  }
 })
 
 router.get('/signup',(req,res)=>{
