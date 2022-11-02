@@ -28,6 +28,18 @@
 
     </tr>
     {{/each}}
+    {{#each queriedUsers}}
+    <tr>
+      <th scope="row">{{@index}}</th>
+      <td>{{this.Name}}</td>
+      <td>{{this.Email}}</td>
+      
+     
+      <td><a href="/admin/edit-user/{{this._id}}"><button type="button" class="btn btn-primary">Edit</button></a></td>
+      <td><a ><button type="button" class="btn btn-danger" onclick="alertMsg('{{this._id}}')">Delete</button></a></td>
+
+    </tr>
+    {{/each}}
 
 </table>
     </div>
@@ -37,19 +49,19 @@
     function alertMsg(id){
         swal({
   title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
+  text: "Once deleted, you will not be able to recover this file!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
 })
 .then((willDelete) => {
   if (willDelete) {
-    swal("Poof! Your imaginary file has been deleted!", {
+    swal(" Your file has been deleted!", {
       icon: "success",
     });
     location.href="/admin/delete-user/"+id;
   } else {
-    swal("Your imaginary file is safe!");
+    swal("Your file is safe!");
   }
 });
     }

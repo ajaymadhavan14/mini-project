@@ -1,6 +1,6 @@
-const { response } = require('express');
+//const { response } = require('express');
 var express = require('express');
-const { render } = require('../app');
+//const { render } = require('../app');
 var router = express.Router();
 var productHelpers = require('../helpers/product-helpers');
 var userHelpers = require('../helpers/user-helpers');
@@ -127,6 +127,12 @@ router.post('/edit-user/:id',(req,res)=>{
 router.get('/logout',(req,res)=>{
   req.session.destroy();
   res.redirect('/admin')
+})
+
+router.post('/allusers/search',(req,res)=>{
+  userHelpers.searchUser(req.body.searchdata).then((queriedUsers)=>{
+    res.render('admin/userdetails',{queriedUsers,admin:true})
+  })
 })
 
 

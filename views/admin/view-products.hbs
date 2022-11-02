@@ -37,19 +37,19 @@
     function alertMsg(id){
         swal({
   title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
+  text: "Once deleted, you will not be able to recover this  file!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
 })
 .then((willDelete) => {
   if (willDelete) {
-    swal("Poof! Your imaginary file has been deleted!", {
+    swal(" Your  file has been deleted!", {
       icon: "success",
     });
     location.href="/admin/delete-product/"+id;
   } else {
-    swal("Your imaginary file is safe!");
+    swal("Your file is safe!");
   }
 });
     }

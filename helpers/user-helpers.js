@@ -1,7 +1,7 @@
 var db = require('../config/connection');
 var collection = require('../config/collections');
 const bcrypt = require('bcrypt');
-const { response } = require('express');
+//const { response } = require('express');
 var objectId = require('mongodb').ObjectId
 
 module.exports={
@@ -15,6 +15,7 @@ module.exports={
              
         })
     },
+    
     doLogin:(userData)=>{
         return new Promise(async (resolve,reject)=>{
             let loginStatus=false
@@ -46,6 +47,7 @@ module.exports={
         })
     },
 
+    
     deleteUser:(userId)=>{
         return new Promise((resolve,reject)=>{
             //console.log(userId);
@@ -56,9 +58,9 @@ module.exports={
             })
         })
 
-     },
+    },
 
-     getUserDetails:(prodId)=>{
+    getUserDetails:(prodId)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(prodId)}).then((user)=>{
                 resolve(user)
@@ -77,7 +79,17 @@ module.exports={
                 resolve()
             })
         })
-      }
+    },
+
+
+    searchUser:(data)=>{
+        let qData= new RegExp(data,"i")
+        return new Promise(async (resolve,reject)=>{
+            let users=await db.get().collection(collection.USER_COLLECTION).find({Name:{$regex:qData}}).toArray()
+            resolve(users)
+        })
+    }
+
 
 
 

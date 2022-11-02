@@ -22,7 +22,7 @@ app.engine('hbs',expressHbs.engine({extname:'hbs',defaultLayout:'layout',layouts
 app.use(session({
   secret: "key",
   saveUninitialized: true,
-  cookie: {maxAge: 60000},
+  cookie: {maxAge: 600000},
   resave: false
 }))
 
