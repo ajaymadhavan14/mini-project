@@ -5,6 +5,8 @@ var productHelpers = require('../helpers/product-helpers');
 var userHelpers = require('../helpers/user-helpers');
 
 /* GET home page. */
+// router.get('/:xyz', function(req, res, next) {
+//   res.redirect('profile')})
 router.get('/', function(req, res, next) {
   let users=req.session.user
     productHelpers.getAllProducts().then((products)=>{

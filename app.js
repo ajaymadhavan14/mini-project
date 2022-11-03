@@ -44,8 +44,9 @@ db.connect((err,done)=>{
   if(err) console.log('Connection error'+err);
   else console.log('Database connected');
 })
-app.use('/', userRouter);
 app.use('/admin', adminRouter);
+app.use('/', userRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
